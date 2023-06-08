@@ -1,0 +1,57 @@
+#define _CRT_SECURE_NO_WARNINGS
+
+/*
+ * PL/0 编译器
+ *
+ * 使用方法：
+ * 运行后输入PL/0源程序文件?
+ * 回答是否输出虚拟机代码
+ * 回答是否输出名字表
+ * fa.pcode输出虚拟机代码
+ * fa1.tmp输出源文件及其各行对应的首地址
+ * out.tmp输出运行结果
+ * fas.tmp输出名字表
+ */
+
+#include "pl0.h"
+#include "string.h"
+
+ //运行前初始化，对保留字表 (word)、保留字表中每一个保留字对应的 symbol 类型 ( wsym )、
+ //部分符号对应的 symbol 类型表 ( ssym )、类 PCODE 指令助记符表 ( mnemonic )、
+ //声明开始集合 ( declbegsys )、表达式开始集合 ( statbegsys )、
+ //项开始符号集合 ( facbegsys ) 以及一些全局变量的初始化
+void init()
+{
+	jp.CycleNum = 0;
+	jp.Addr = 0;
+	int i;
+	// ASCII 范围(0–31 控制字符, 32–126 分配给了能在键盘上找到的字符
+	//数字 127 代表 DELETE 命令, 后 128 个是扩展 ASCII 打印字符) 因此共 256 个
+	/* 设置单字符符号 */
+	for (i = 0; i <= 255; i++)
+	{
+		ssym[i] = nul;
+	}
+	ssym['+'] = plus;
+	ssym['-'] = minus;
+	ssym['*'] = times;
+	ssym['/'] = slash;
+	ssym['('] = lparen;
+	ssym[')'] = rparen;
+	ssym['='] = eql;
+	ssym[','] = comma;
+	ssym['.'] = period;
+	ssym['#'] = neq;
+	ssym[';'] = semicolon;
+	ssym['['] = Lsquare;
+	ssym[']'] = Rsquare;
+  strcpy(&(word[0][0]), "begin");
+
+	strcpy(&(word[1][0]), "break");
+
+	strcpy(&(word[2][0]), "call");
+	strcpy(&(word[3][0]), "const");
+	strcpy(&(word[4][0]), "do");
+	strcpy(&(word[5][0]), "end");
+
+	strcpy(&(word[6][0]), "for");
