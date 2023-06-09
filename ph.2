@@ -55,3 +55,104 @@ void init()
 	strcpy(&(word[5][0]), "end");
 
 	strcpy(&(word[6][0]), "for");
+	strcpy(&(word[7][0]), "if");
+	strcpy(&(word[8][0]), "odd");
+	strcpy(&(word[9][0]), "procedure");
+	strcpy(&(word[10][0]), "read");
+
+	strcpy(&(word[11][0]), "step");
+
+	strcpy(&(word[12][0]), "then");
+
+	strcpy(&(word[13][0]), "until");
+
+	strcpy(&(word[14][0]), "var");
+	strcpy(&(word[15][0]), "while");
+	strcpy(&(word[16][0]), "write");
+
+	/* 设置保留字符号 */
+	wsym[0] = beginsym;
+
+	wsym[1] = breaksym;
+
+	wsym[2] = callsym;
+	wsym[3] = constsym;
+	wsym[4] = dosym;
+	wsym[5] = endsym;
+
+	wsym[6] = forsym;
+
+	wsym[7] = ifsym;
+	wsym[8] = oddsym;
+	wsym[9] = procsym;
+	wsym[10] = readsym;
+
+	wsym[11] = stepsym;
+
+	wsym[12] = thensym;
+
+	wsym[13] = untilsym;
+
+	wsym[14] = varsym;
+	wsym[15] = whilesym;
+	wsym[16] = writesym;
+
+	/* 设置指令名称 */
+	strcpy(&(mnemonic[lit][0]), "lit");
+	strcpy(&(mnemonic[opr][0]), "opr");
+	strcpy(&(mnemonic[lod][0]), "lod");
+	strcpy(&(mnemonic[sto][0]), "sto");
+	strcpy(&(mnemonic[cal][0]), "cal");
+	strcpy(&(mnemonic[inte][0]), "int");
+	strcpy(&(mnemonic[jmp][0]), "jmp");
+	strcpy(&(mnemonic[jpc][0]), "jpc");
+	//数组
+	strcpy(&(mnemonic[sta][0]), "sta");
+	strcpy(&(mnemonic[lda][0]), "lda");
+
+	/* 设置符号集 */
+	for (i = 0; i < symnum; i++)
+	{
+		declbegsys[i] = false;
+		statbegsys[i] = false;
+		facbegsys[i] = false;
+		ExpressionFollow[i] = false;
+	}
+
+	/* 设置声明开始符号集 */
+	declbegsys[constsym] = true;
+	declbegsys[varsym] = true;
+	declbegsys[procsym] = true;
+
+	/* 设置语句开始符号集 */
+	statbegsys[beginsym] = true;
+	statbegsys[callsym] = true;
+	statbegsys[ifsym] = true;
+	statbegsys[whilesym] = true;
+	statbegsys[readsym] = true;
+	statbegsys[writesym] = true;
+	statbegsys[ident] = true;
+
+	/* 设置因子开始符号集 */
+	facbegsys[ident] = true;
+	facbegsys[number] = true;
+	facbegsys[lparen] = true;
+
+	/* 表达式后跟符号集 */
+	ExpressionFollow[semicolon] = true;
+	ExpressionFollow[period] = true;
+	ExpressionFollow[comma] = true;
+	ExpressionFollow[rparen] = true;
+	ExpressionFollow[Rsquare] = true;
+	ExpressionFollow[eql] = true;
+	ExpressionFollow[neq] = true;
+	ExpressionFollow[geq] = true;
+	ExpressionFollow[leq] = true;
+	ExpressionFollow[gtr] = true;
+	ExpressionFollow[lss] = true;
+	ExpressionFollow[endsym] = true;
+	ExpressionFollow[thensym] = true;
+	ExpressionFollow[dosym] = true;
+	ExpressionFollow[stepsym] = true;
+	ExpressionFollow[untilsym] = true;
+}
